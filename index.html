@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>André Gonçalves</title>
+    <style>
+      body {
+        text-align: center;
+        margin: 0;
+        overflow: hidden;
+        background-color: #231F20; /* Grey color similar to Unity loading screen */
+      }
+
+      #top-bar {
+        position: absolute;
+        top: 0;
+        right: 40px; /* 40px margin to the right */
+        width: auto;
+        height: 50px;
+        background-color: rgba(51, 51, 51, 0);
+        color: white;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        z-index: 1;
+        padding: 0 10px;
+      }
+
+      #top-bar button {
+        padding: 10px 20px;
+        margin-right: 20px; /* 20px spacing between buttons */
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: box-shadow 0.3s;
+        color: white; /* Set the color of the symbol to white */
+      }
+
+      #top-bar button:last-child {
+        margin-right: 0; /* No spacing for the last button */
+        background-color: #FF0000; /* Red tone matching other buttons */
+      }
+
+      #top-bar button:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), inset 0 3px 6px rgba(255, 255, 255, 0.2);
+      }
+
+      #top-bar button.github {
+        background-color: #4CAF50;
+      }
+
+      #top-bar button.linkedin {
+        background-color: #0077B5;
+      }
+
+      #top-bar button.curriculum {
+        background-color: #757575;
+      }
+
+      #top-bar button.email {
+        background-color: #FF0000;
+      }
+
+      #unity-container {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      #unity-canvas {
+        width: 100%;
+        height: calc(100vw * 9 / 16); /* 16:9 aspect ratio (100vw * 9/16) */
+      }
+    </style>
+    <script src="https://use.fontawesome.com/29261069b1.js"></script>
+  </head>
+  <body>
+    <div id="top-bar">
+      <button class="github" onclick="handleButtonClick(1)">
+        <i class="fa fa-github" aria-hidden="true"></i>
+      </button>
+      <button class="linkedin" onclick="handleButtonClick(2)">
+        <i class="fa fa-linkedin" aria-hidden="true"></i>
+      </button>
+      <button class="curriculum" onclick="handleButtonClick(3)">
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+      </button>
+      <button class="email" onclick="handleButtonClick(4)">
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div id="unity-container">
+      <canvas id="unity-canvas" tabindex="-1"></canvas>
+    </div>
+    <script src="Build/PersonalBeta.loader.js"></script>
+    <script>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+
+        var canvas = document.querySelector("#unity-canvas");
+        canvas.style.width = "100%";
+        canvas.style.height = "calc(100vw * 9 / 16)";
+        canvas.style.position = "fixed";
+
+        document.body.style.textAlign = "left";
+      }
+
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/PersonalBeta.data",
+        frameworkUrl: "Build/PersonalBeta.framework.js",
+        codeUrl: "Build/PersonalBeta.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Personal",
+        productVersion: "0.1.0",
+      });
+
+      function handleButtonClick(buttonNumber) {
+        switch (buttonNumber) {
+          case 1:
+            window.open("https://github.com/Simbs38", "_blank");
+            break;
+          case 2:
+            window.open("https://www.linkedin.com/in/andregoncalvescg/", "_blank");
+            break;
+          case 3:
+            window.open("https://drive.google.com/file/d/1kmjBz8kA4PweijVBcZrMUs0Ws7GP6Fya/view?usp=sharing", "_blank");
+            break;
+          case 4:
+            window.location.href = "mailto:2k9andre@gmail.com";
+            break;
+          default:
+            break;
+        }
+      }
+    </script>
+  </body>
+</html>
